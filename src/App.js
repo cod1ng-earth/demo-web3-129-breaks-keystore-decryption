@@ -29,17 +29,31 @@ function App() {
 
   const [pk,setPk] =  useState("")
 
+  function testBuffers() {
+    const buf1 = new Uint8Array([1,2,3,4]);
+    const buf2 = new Uint8Array([5,6,7,8]);
+    
+    //won't work in react like this.
+    //const res = Buffer.concat([buf1, buf2]);
+
+    const ciphertext = Buffer.from("1234567890", 'hex');
+
+    //this works: 
+    const res2 = Uint8Array.from([...buf1, ...ciphertext]);
+    console.log (Buffer.from(res2));
+  }
+
   function decryptWallet() {
     const web3 = new Web3();
     const jsonKeystore = JSON.parse(KEYSTORE);
     const res = web3.eth.accounts.wallet.decrypt(jsonKeystore, "test");
     setPk(res[0].privateKey);
-
   }
 
   return (
     <div className="App">
       <button onClick={decryptWallet}>decrypt it</button>
+      <button onClick={testBuffers}>test buffers</button>
       <p>{pk}</p>
     </div>
   );
