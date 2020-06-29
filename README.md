@@ -11,7 +11,17 @@ error message is
 
 ```
 yarn
-yarn run start
+yarn remove web3
+yarn add web3@1.2.8
+yarn run start #works;
+yarn remove web3
+yarn add web3@1.2.9
+yarn run start #breaks;
+yarn remove web3
+(npm i -g lerna)
+yarn add web3@https://github.com/ethereum/web3.js.git#1.x
+yarn run start #works
+
 ```
 
 ### see it works on 1.2.8
@@ -27,3 +37,8 @@ serve -s build
 http://localhost:3000/plain.html #works
 
 ```
+
+### fixed in web3.js
+
+https://github.com/ethereum/web3.js/commit/d6bdafd73be901bd280d17d4126d25ffa23da556
+https://github.com/ethereum/web3.js/issues/3580
